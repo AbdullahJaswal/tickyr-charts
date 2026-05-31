@@ -1,0 +1,26 @@
+{
+  "name": "@abdullahjaswal/tickyr-charts-wasm",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "description": "Vendored WebAssembly bindings for the Tickyr Charts Rust engine (wasm-bindgen, --target bundler). Committed in-repo; not fetched from any registry.",
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "files": [
+    "tickyr_charts_wasm_bg.wasm",
+    "tickyr_charts_wasm.js",
+    "tickyr_charts_wasm_bg.js",
+    "tickyr_charts_wasm.d.ts"
+  ],
+  "main": "tickyr_charts_wasm.js",
+  "module": "tickyr_charts_wasm.js",
+  "types": "tickyr_charts_wasm.d.ts",
+  "exports": {
+    ".": {
+      "types": "./tickyr_charts_wasm.d.ts",
+      "import": "./tickyr_charts_wasm.js"
+    }
+  },
+  "sideEffects": [
+    "./tickyr_charts_wasm.js"
+  ]
+}

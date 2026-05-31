@@ -1,0 +1,129 @@
+{
+  "name": "@abdullahjaswal/charts",
+  "version": "0.1.0",
+  "description": "Tickyr Charts: opinionated, canvas-rendered trading charts for React + Solid, powered by a vendored Rust/WASM engine.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdullahJaswal/tickyr_charts.git",
+    "directory": "web"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./solid": {
+      "types": "./dist/solid.d.ts",
+      "import": "./dist/solid.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "overrides": {
+    "ajv": "^8.0.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "build:storybook": "NODE_OPTIONS=\"--disable-warning=DEP0205\" storybook build",
+    "dev": "vite build --watch",
+    "fmt": "biome format --write .",
+    "fmt:check": "biome format .",
+    "bench": "bun run bench/run.ts",
+    "lint": "biome lint src",
+    "lint:zero-alloc": "bun scripts/lint-zero-alloc.ts",
+    "storybook": "NODE_OPTIONS=\"--disable-warning=DEP0205\" storybook dev -p 6006 --no-open",
+    "shots": "node scripts/capture-readme-shots.mjs",
+    "test": "NODE_OPTIONS=\"--disable-warning=DEP0205\" vitest run",
+    "test:watch": "NODE_OPTIONS=\"--disable-warning=DEP0205\" vitest",
+    "test:visual": "NODE_OPTIONS=\"--disable-warning=DEP0205\" vitest run --project=stories",
+    "test:visual:update": "NODE_OPTIONS=\"--disable-warning=DEP0205\" vitest run --project=stories -u",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "d3-array": "^3.2.4",
+    "d3-format": "^3.1.2",
+    "d3-scale": "^4.0.2",
+    "d3-shape": "^3.2.0",
+    "d3-time-format": "^4.1.0",
+    "d3-zoom": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "solid-js": "^1.9.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@abdullahjaswal/tickyr-charts-wasm": "workspace:*",
+    "@biomejs/biome": "^2.4.16",
+    "@microsoft/api-extractor": "^7.58.7",
+    "@playwright/test": "1.59.1",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@solidjs/testing-library": "^0.8.10",
+    "@storybook/addon-a11y": "^10.3.6",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/addon-themes": "^10.3.6",
+    "@storybook/addon-vitest": "^10.3.6",
+    "@storybook/react-vite": "^10.3.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/d3-array": "^3.2.0",
+    "@types/d3-format": "^3.0.0",
+    "@types/d3-scale": "^4.0.0",
+    "@types/d3-shape": "^3.1.0",
+    "@types/d3-time-format": "^4.0.0",
+    "@types/d3-zoom": "^3.0.0",
+    "@types/node": "^25.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
+    "axe-core": "^4.11.4",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "fast-check": "^4.7.0",
+    "happy-dom": "^20.9.0",
+    "lefthook": "^2.1.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "solid-js": "^1.9.12",
+    "storybook": "^10.3.6",
+    "storybook-solidjs-vite": "^10.0.12",
+    "tinybench": "^6.0.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.11",
+    "vite-plugin-dts": "^5.0.0",
+    "vite-plugin-solid": "^2.11.12",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0",
+    "vitest": "^4.1.5"
+  }
+}

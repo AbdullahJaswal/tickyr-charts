@@ -1,0 +1,48 @@
+# Dependencies
+node_modules
+
+# Build / cache outputs
+dist
+storybook-static
+.storybook-cache
+.cache
+coverage
+.vite-temp
+.vite-cache
+
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# Package tarballs (npm pack / bun pm pack output)
+*.tgz
+
+# Test / bench scratch output
+.vitest-attachments
+playwright-report/
+test-results/
+bench-results
+
+# Local scratch demos
+.demos
+
+# Env / secrets. Never commit.
+.env
+.env.*
+!.env.example
+.npmrc.local
+.npmrc.*.local
+
+# Visual-regression baselines are generated locally per platform. Only the
+# canonical Linux-Chromium set is committed for cross-machine determinism;
+# every other platform's baselines stay local.
+src/**/__screenshots__/**/*-chromium-darwin.png
+src/**/__screenshots__/**/*-chromium-darwin-*.png
+src/**/__screenshots__/**/*-firefox-*.png
+src/**/__screenshots__/**/*-webkit-*.png
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.log

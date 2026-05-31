@@ -1,0 +1,160 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Introduction" />
+
+# @abdullahjaswal/charts
+
+Multi-platform chart library for trading and financial-data visualization.
+React + Solid adapters share one framework-agnostic controller per chart;
+canvas + d3-math + a Rust engine compiled to WASM do the heavy lifting.
+
+## Install
+
+```sh
+bun add @abdullahjaswal/charts
+# or: npm install @abdullahjaswal/charts
+```
+
+## Quick start
+
+### React
+
+```tsx
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/charts/react"
+
+export default function App() {
+  return (
+    <ChartsProvider theme="dark" palette="Monochrome">
+      <CandleChart
+        data={{ candles: bars }}
+        width={900}
+        height={400}
+      />
+    </ChartsProvider>
+  )
+}
+```
+
+### Solid
+
+```tsx
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/charts/solid"
+
+function App() {
+  return (
+    <ChartsProvider theme="dark" palette="Monochrome">
+      <CandleChart data={{ candles: bars }} width={900} height={400} />
+    </ChartsProvider>
+  )
+}
+```
+
+## What's in the library
+
+| Chart | Use case |
+|---|---|
+| `LineChart` | Time-series price / value line; supports SMA/EMA/WMA/Bollinger overlays |
+| `AreaChart` | Filled line - same as LineChart with `areaFill` set |
+| `CandleChart` | OHLC candles with volume sub-pane, indicators (RSI/MACD/Stochastic/ATR), VWAP overlay, signal/order/event markers, drawing tools |
+| `BarChart` | Categorical bars - vertical or horizontal, grouped / stacked / overlapping |
+| `ScatterChart` | XY point scatter with optional regression + density heatmap mode |
+| `HistogramChart` | Distribution binning with multiple algorithms (freedman-diaconis / sturges / fixed) |
+| `HeatmapChart` | Matrix heatmap with diverging / sequential / categorical color scales |
+| `PieChart` / `DonutChart` | Categorical share-of-total visualizations |
+| `SunburstChart` / `TreemapChart` | Hierarchical part-to-whole with drill-down |
+| `SankeyChart` | Flow diagrams with multi-stage transitions |
+| `DepthChart` | Orderbook bid/ask depth with mid-line + spread display |
+| `RenkoChart` / `KagiChart` / `PointFigureChart` | Price-only "filtered-time" charts |
+
+## Common props
+
+Every chart accepts:
+
+- **Data**: `data?` (single series) or `series?` (multi-series, where supported)
+- **Sizing**: `width?`, `height?` in CSS pixels
+- **Visuals**: `theme?`, `palette?`, `visualStyle?` (`"Fill"` / `"Outline"`)
+- **Axes**: `axisVisible?`, `yAxisPosition?`, `xAxisPosition?`,
+  `gridVisible?`, `gridStyle?`, `gridDensity?`
+- **Localization**: `locale?`, `timeZone?`, `digitGrouping?`,
+  `numberAbbreviation?`, `currency?`, `currencyDisplay?`
+- **Interaction**: `crosshairVisible?`, `crosshairMarker?`,
+  `crosshairSnap?`
+- **Live state**: `liveSince?`, `connectionState?`,
+  `connectionIndicator?`, `staleVisualization?`,
+  `staleThreshold?`
+
+Open any chart's **Docs** tab in the sidebar for the full prop table -
+every option is auto-extracted from the TypeScript types.
+
+## Provider
+
+`ChartsProvider` wires shared defaults (theme, palette, locale,
+timezone, etc.) that individual charts inherit. Per-chart props always
+win over provider values.
+
+```tsx
+<ChartsProvider
+  theme="inherit"
+  palette="Monochrome"
+  locale="USA"
+  timeZone="America/New_York"
+  visualStyle="Fill"
+>
+  {/* charts here */}
+</ChartsProvider>
+```
+
+## Streaming + live ticks
+
+Two ways to push live data:
+
+### Imperative `chart.onTick(time, price, size)`
+
+```tsx
+const ref = useRef<CandleChartHandle>(null)
+// ...
+ref.current?.onTick(timeMs, price, size)
+```
+
+By default this updates the last bar's high/low/close in place. Pass
+the `streaming?` prop to route ticks through the engine's
+validate-and-aggregate pipeline (handles bucket transitions, anomaly
+detection, audit/telemetry callbacks).
+
+### `useStreamingCandles` hook
+
+```tsx
+import { useStreamingCandles } from "@abdullahjaswal/charts/react"
+
+const { candles, pushTick } = useStreamingCandles({
+  timeframeMinutes: 1,
+  market: "equity",
+  minPriceRaw: 0,
+  maxPriceRaw: 1_000_000,
+  maxVolumeRaw: 1_000_000_000,
+})
+
+return <CandleChart data={candles} />
+```
+
+The hook owns the streaming engine + a pre-allocated SoA bar buffer.
+Each `pushTick` validates + aggregates + emits a fresh
+`BinaryCandleSeriesInput` snapshot (zero-copy typed-array slice).
+
+## Performance
+
+The library targets sustained 60fps on mid-tier 2022 Android devices -
+the per-chart hot paths are zero-allocation (typed-array iteration,
+pre-cached color strings, pooled Path2D + scratch buffers,
+spatial-quadtree hit-tests, LTTB downsampling above 1000 points,
+partial dirty-rect repaints, optional OffscreenCanvas worker
+dispatch).
+
+## Engine
+
+All compute (indicators, signal interpreters, downsampling,
+spatial hit-testing, time-axis tick generation, streaming
+validate-and-aggregate, timeframe rollup) lives in a Rust core compiled
+to WebAssembly and bundled into the package, so it installs
+self-contained. The charts call into it internally; the library never
+re-implements engine algorithms in TypeScript.

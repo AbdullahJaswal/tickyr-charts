@@ -1,0 +1,20 @@
+# Git hooks. Activate once with `bunx lefthook install` after the repo is
+# initialised. Pre-commit runs lint + typecheck on the staged files; pre-push
+# runs the unit suite.
+
+pre-commit:
+  parallel: true
+  commands:
+    biome-lint:
+      glob: "*.{ts,tsx,js,jsx}"
+      run: bunx biome lint --no-errors-on-unmatched {staged_files}
+    typecheck:
+      run: bun run typecheck
+    biome-format:
+      glob: "*.{ts,tsx,js,jsx,json,jsonc,css}"
+      run: bunx biome format --no-errors-on-unmatched {staged_files}
+
+pre-push:
+  commands:
+    test:
+      run: bun run test

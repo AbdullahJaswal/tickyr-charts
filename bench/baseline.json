@@ -1,0 +1,124 @@
+{
+  "$schema": "./baseline.schema.json",
+  "version": "0.1.0",
+  "purpose": "Reference-device frame-time + memory measurements per chart. Run on a mid-tier reference device (Snapdragon 6-class Android Chrome, 4 GB RAM - Samsung A33 / Redmi Note 11 territory). Values left null until measured.",
+  "method": "Connect Snapdragon 6 Android device via USB; open Chrome on the device pointing at the Storybook static deploy; pair via Chrome remote-devtools (chrome://inspect on desktop); enable Performance panel; record a 5-second pan/zoom interaction; read `frame_ms_p95` from Performance Timing.",
+  "targets": {
+    "frame_ms_p95_ms": 16,
+    "first_paint_ms": 16,
+    "memory_resident_typical_kb": 4096,
+    "memory_resident_sparkline_kb": 100
+  },
+  "charts": {
+    "LineChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "AreaChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "CandleChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "BarChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "RenkoChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "KagiChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "PointFigureChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "PieChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "DonutChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "TreemapChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "SunburstChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "HeatmapChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "HistogramChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "ScatterChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "DepthChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    },
+    "SankeyChart": {
+      "frame_ms_p95_ms": null,
+      "first_paint_ms": null,
+      "memory_resident_kb": null,
+      "notes": null
+    }
+  },
+  "scenarios": {
+    "candle_50k_pan_zoom": {
+      "frame_ms_p95_ms": null,
+      "notes": "50k-bar candle dataset, 3 indicators, 5s pan + 5s zoom interaction"
+    },
+    "watchlist_8_charts": {
+      "frame_ms_p95_ms": null,
+      "notes": "8 LineCharts mounted on one screen, shared engine, 1 Hz live tick on each"
+    },
+    "scatter_100k_marks": {
+      "frame_ms_p95_ms": null,
+      "notes": "100k-point scatter, density mode auto-engaged"
+    }
+  }
+}

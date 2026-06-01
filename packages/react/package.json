@@ -1,6 +1,6 @@
 {
   "name": "@abdullahjaswal/tickyr-charts-react",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Tickyr Charts for React: opinionated, canvas-rendered trading and financial-data charts, powered by a vendored Rust/WASM engine.",
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",

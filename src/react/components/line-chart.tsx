@@ -41,7 +41,7 @@ import {
 
 // Framework-agnostic helpers, types, constants, and draw functions live in
 // `charts/line-chart-helpers.ts`. The React adapter re-exports them so
-// existing import paths (`from "@abdullahjaswal/charts/.../react/components/
+// existing import paths (`from "@abdullahjaswal/tickyr-charts/.../react/components/
 // line-chart"`) keep resolving - and so the controller + Solid adapter can
 // import them from this same surface during the migration period.
 export {

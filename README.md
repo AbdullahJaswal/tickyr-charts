@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/logo-dark.svg">
-    <img src="assets/brand/logo-light.svg" alt="Tickyr Charts" width="84" height="84">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/brand/logo-dark.svg">
+    <img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/brand/logo-light.png" alt="Tickyr Charts" width="84" height="84">
   </picture>
 </p>
 
@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <code>@abdullahjaswal/charts</code>
+  <code>@abdullahjaswal/tickyr-charts</code>
 </p>
 
 ## Gallery
@@ -27,13 +27,13 @@ Every example is rendered live from the library. Theme (light / dark), color sch
   <tr><td></td><th>Monochrome</th><th>Classic</th></tr>
   <tr>
     <th>Light</th>
-    <td><img src="assets/readme/candle-light-monochrome.png" width="400" alt="CandleChart, light theme, Monochrome palette, Outline style" /></td>
-    <td><img src="assets/readme/candle-light-classic.png" width="400" alt="CandleChart, light theme, Classic palette, Outline style" /></td>
+    <td><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/candle-light-monochrome.png" width="400" alt="CandleChart, light theme, Monochrome palette, Outline style" /></td>
+    <td><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/candle-light-classic.png" width="400" alt="CandleChart, light theme, Classic palette, Outline style" /></td>
   </tr>
   <tr>
     <th>Dark</th>
-    <td><img src="assets/readme/candle-dark-monochrome.png" width="400" alt="CandleChart, dark theme, Monochrome palette, Outline style" /></td>
-    <td><img src="assets/readme/candle-dark-classic.png" width="400" alt="CandleChart, dark theme, Classic palette, Outline style" /></td>
+    <td><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/candle-dark-monochrome.png" width="400" alt="CandleChart, dark theme, Monochrome palette, Outline style" /></td>
+    <td><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/candle-dark-classic.png" width="400" alt="CandleChart, dark theme, Classic palette, Outline style" /></td>
   </tr>
 </table>
 
@@ -41,12 +41,12 @@ Every example is rendered live from the library. Theme (light / dark), color sch
 
 <table>
   <tr>
-    <td align="center"><img src="assets/readme/treemap-dark-classic.png" width="400" alt="TreemapChart, dark theme, Classic palette, Outline style" /><br /><sub>TreemapChart, dark, Classic</sub></td>
-    <td align="center"><img src="assets/readme/heatmap-light-monochrome.png" width="400" alt="HeatmapChart, light theme, Monochrome palette, Outline style" /><br /><sub>HeatmapChart, light, Monochrome</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/treemap-dark-classic.png" width="400" alt="TreemapChart, dark theme, Classic palette, Outline style" /><br /><sub>TreemapChart, dark, Classic</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/heatmap-light-monochrome.png" width="400" alt="HeatmapChart, light theme, Monochrome palette, Outline style" /><br /><sub>HeatmapChart, light, Monochrome</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/readme/depth-light-classic.png" width="400" alt="DepthChart, light theme, Classic palette, Outline style" /><br /><sub>DepthChart, light, Classic</sub></td>
-    <td align="center"><img src="assets/readme/line-dark-monochrome.png" width="400" alt="LineChart, dark theme, Monochrome palette, Outline style" /><br /><sub>LineChart, dark, Monochrome</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/depth-light-classic.png" width="400" alt="DepthChart, light theme, Classic palette, Outline style" /><br /><sub>DepthChart, light, Classic</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/AbdullahJaswal/tickyr-charts/main/assets/readme/line-dark-monochrome.png" width="400" alt="LineChart, dark theme, Monochrome palette, Outline style" /><br /><sub>LineChart, dark, Monochrome</sub></td>
   </tr>
 </table>
 
@@ -79,8 +79,8 @@ Every example is rendered live from the library. Theme (light / dark), color sch
 ## Install
 
 ```sh
-bun add @abdullahjaswal/charts
-# or: npm install @abdullahjaswal/charts
+bun add @abdullahjaswal/tickyr-charts
+# or: npm install @abdullahjaswal/tickyr-charts
 ```
 
 ## Quick start
@@ -88,7 +88,7 @@ bun add @abdullahjaswal/charts
 ### React
 
 ```tsx
-import { ChartsProvider, CandleChart } from "@abdullahjaswal/charts/react"
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts/react"
 
 export default function App() {
   return (
@@ -108,7 +108,7 @@ export default function App() {
 ### Solid
 
 ```tsx
-import { ChartsProvider, CandleChart } from "@abdullahjaswal/charts/solid"
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts/solid"
 
 function App() {
   return (
@@ -127,7 +127,7 @@ function App() {
 
 ```tsx
 import { useRef } from "react"
-import { CandleChart, type CandleChartHandle } from "@abdullahjaswal/charts/react"
+import { CandleChart, type CandleChartHandle } from "@abdullahjaswal/tickyr-charts/react"
 
 const ref = useRef<CandleChartHandle>(null)
 
@@ -195,7 +195,7 @@ Matches a mid-tier device floor.
 For hosts that prefer a hook-driven setup:
 
 ```tsx
-import { useStreamingCandles } from "@abdullahjaswal/charts/react"
+import { useStreamingCandles } from "@abdullahjaswal/tickyr-charts/react"
 
 const { candles, pushTick, ready } = useStreamingCandles({
   timeframeMinutes: 1,
@@ -213,9 +213,9 @@ The hook owns the streaming engine + pre-allocated bar buffer. Each `pushTick` v
 ## Package surface
 
 ```
-@abdullahjaswal/charts          → shared types, engine helpers, personalization config
-@abdullahjaswal/charts/react    → React adapters
-@abdullahjaswal/charts/solid    → Solid adapters
+@abdullahjaswal/tickyr-charts          → shared types, engine helpers, personalization config
+@abdullahjaswal/tickyr-charts/react    → React adapters
+@abdullahjaswal/tickyr-charts/solid    → Solid adapters
 ```
 
 Both adapters render the same canvas pixels - switch freely between them in the same codebase.

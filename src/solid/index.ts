@@ -1,8 +1,8 @@
-// Public entry for the Solid adapter - published at "@abdullahjaswal/charts/solid".
+// Public entry for the Solid adapter - published at "@abdullahjaswal/tickyr-charts/solid".
 //
 // Mirrors the named exports in src/react/index.ts so adapter parity is
 // enforced at the API surface. Each named export here has a matching named
-// export at "@abdullahjaswal/charts/react" with identical prop semantics; the only
+// export at "@abdullahjaswal/tickyr-charts/react" with identical prop semantics; the only
 // difference is the framework primitive used internally.
 
 // Provider + hooks

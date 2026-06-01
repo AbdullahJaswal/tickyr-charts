@@ -1,4 +1,4 @@
-// Public API for @abdullahjaswal/charts.
+// Public API for @abdullahjaswal/tickyr-charts.
 
 // Memory-pressure wiring - runs once at module load so a host call to
 // `notifyMemoryPressure()` clears the lib's regenerable caches (pattern

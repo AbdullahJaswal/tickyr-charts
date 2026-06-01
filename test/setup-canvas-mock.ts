@@ -198,7 +198,7 @@ function makeMock(): MockContext2DLike {
   return mock
 }
 
-const ctxKey = Symbol.for("@abdullahjaswal/charts.canvasMockCtx")
+const ctxKey = Symbol.for("@abdullahjaswal/tickyr-charts.canvasMockCtx")
 const original = HTMLCanvasElement.prototype.getContext as unknown as (
   type: string,
 ) => unknown

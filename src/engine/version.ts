@@ -43,7 +43,7 @@ export class EngineVersionMismatchError extends Error {
   override readonly name = "EngineVersionMismatchError"
   constructor(actual: string) {
     super(
-      `@abdullahjaswal/charts requires engine ${ENGINE_COMPATIBILITY.major}.${ENGINE_COMPATIBILITY.minorMin}.x; got "${actual}".`,
+      `@abdullahjaswal/tickyr-charts requires engine ${ENGINE_COMPATIBILITY.major}.${ENGINE_COMPATIBILITY.minorMin}.x; got "${actual}".`,
     )
   }
 }

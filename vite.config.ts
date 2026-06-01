@@ -3,31 +3,11 @@ import { fileURLToPath } from "node:url"
 import { dirname, resolve } from "node:path"
 import dts from "vite-plugin-dts"
 import solid from "vite-plugin-solid"
-import react, { reactCompilerPreset } from "@vitejs/plugin-react"
-import babel from "@rolldown/plugin-babel"
+import react from "@vitejs/plugin-react"
 import wasm from "vite-plugin-wasm"
 import topLevelAwait from "vite-plugin-top-level-await"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-
-// React Compiler preset - STRICTLY scoped to `src/react/**`. The
-// preset's default filter is permissive (matches any file the compiler
-// thinks might be React) and picks up Solid components too because both
-// use `.tsx`. Wrong-target compilation injects calls to React's
-// `useMemoCache`, which crashes Solid at runtime with
-// `null is not an object (evaluating 'dispatcher.useMemoCache')`.
-// Override the rolldown-side filter to a hard include list and a hard
-// exclude of `src/solid/` for double safety.
-const reactCompiler = reactCompilerPreset()
-reactCompiler.rolldown = {
-  ...reactCompiler.rolldown,
-  filter: {
-    id: {
-      include: [/[\\/]src[\\/]react[\\/].*\.(?:t|j)sx?$/],
-      exclude: [/[\\/]src[\\/]solid[\\/]/, /[\\/]node_modules[\\/]/],
-    },
-  },
-}
 
 export default defineConfig({
   plugins: [
@@ -40,13 +20,6 @@ export default defineConfig({
     dts({ bundleTypes: true }),
     react({
       include: ["src/react/**/*.{ts,tsx}"],
-    }),
-    // React Compiler (React 19 GA) - auto-memoizes function components
-    // and defends against dependency-array bugs in future contributors'
-    // code without changing the runtime dependency surface for
-    // consumers. Per PRINCIPLES.md #4 (memoization for pure transforms).
-    babel({
-      presets: [reactCompiler],
     }),
     solid({
       // Restrict to .tsx - Solid's JSX transform only matters for files

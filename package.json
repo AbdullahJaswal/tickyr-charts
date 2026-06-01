@@ -1,10 +1,12 @@
 {
   "name": "@abdullahjaswal/tickyr-charts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tickyr Charts: opinionated, canvas-rendered trading charts for React + Solid, powered by a vendored Rust/WASM engine.",
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AbdullahJaswal/tickyr-charts.git"

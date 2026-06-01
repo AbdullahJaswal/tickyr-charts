@@ -581,9 +581,11 @@ export class CandleChartController {
   handlePointerMove(e: PointerEvent): void {
     const handle = this.handle
     if (handle === null) return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
-    const rect = target.getBoundingClientRect()
+    // Use the static-canvas rect, not e.currentTarget: React routes pointer
+    // events through delegation (one listener at the root), so the native
+    // event's currentTarget is not this element. The static canvas shares the
+    // container's top-left, so px/py are unchanged for direct-binding adapters.
+    const rect = this.staticCanvas.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top
     const layout = handle.layout
@@ -894,9 +896,9 @@ export class CandleChartController {
     if (handle === null) return
     const ar = this.arr
     if (ar.length < 2) return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
-    const r = target.getBoundingClientRect()
+    // See note in handlePointerMove: use the static-canvas rect, not
+    // e.currentTarget (null under React's event delegation).
+    const r = this.staticCanvas.getBoundingClientRect()
     const px = e.clientX - r.left
     const layout = handle.layout
     if (px < layout.innerLeft || px > layout.innerRight) return
@@ -945,8 +947,11 @@ export class CandleChartController {
     if (this.disposed) return
     const handle = this.handle
     if (handle === null) return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
+    // Use the static-canvas rect, not e.currentTarget: React routes pointer
+    // events through delegation (one listener at the root), so the native
+    // event's currentTarget is not this element. The static canvas shares the
+    // container's top-left, so px/py are unchanged for direct-binding adapters.
+    const target = this.staticCanvas
     const rect = target.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top

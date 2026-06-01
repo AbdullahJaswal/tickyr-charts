@@ -203,8 +203,7 @@ export class TreemapChartController {
   handlePointerMove(e: PointerEvent): void {
     const handle = this.handle
     if (handle === null || this.hierarchy.length === 0) return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
+    const target = this.staticCanvas
     const rect = target.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top
@@ -256,8 +255,7 @@ export class TreemapChartController {
   handleClick(e: MouseEvent): void {
     const handle = this.handle
     if (handle === null || this.resolvedViewMode !== "drill-down") return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
+    const target = this.staticCanvas
     const rect = target.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top

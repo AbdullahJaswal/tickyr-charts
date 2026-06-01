@@ -187,8 +187,7 @@ export class HistogramChartController {
     const handle = this.handle
     if (handle === null) return
     if (this.binCount === 0) return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
+    const target = this.staticCanvas
     const rect = target.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top

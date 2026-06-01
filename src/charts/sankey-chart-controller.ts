@@ -315,8 +315,7 @@ export class SankeyChartController {
     const handle = this.handle
     if (handle === null) return
     if (this.graph.nodeCount === 0) return
-    const target = e.currentTarget as HTMLElement | null
-    if (target === null) return
+    const target = this.staticCanvas
     const rect = target.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top

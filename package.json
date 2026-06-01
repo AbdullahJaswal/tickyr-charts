@@ -1,6 +1,6 @@
 {
   "name": "@abdullahjaswal/tickyr-charts-build",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Build root for the Tickyr Charts adapter packages (not published). See packages/react and packages/solid.",
   "private": true,
   "license": "SEE LICENSE IN LICENSE",

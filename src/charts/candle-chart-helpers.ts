@@ -2946,7 +2946,17 @@ export function drawCandleChartDynamicLayer(
   void deriveLiveState
   void liveStateInputs
 
-  if (hover === null || !cfg.crosshairVisible || crosshairAlpha <= 0) return
+  if (hover === null || !cfg.crosshairVisible || crosshairAlpha <= 0) {
+    // Balance applyDirtyClipMulti's save() above. Without this, the
+    // partial-repaint clip leaks on every frame that early-returns here
+    // (hover null, crosshair hidden, or faded to alpha 0 - all common,
+    // since the top-strip dirty rect is pushed unconditionally so `partial`
+    // is almost always true). Leaked clips stack on the dynamic context and
+    // their intersection collapses later crosshair draws to the constant
+    // top strip - the "crosshair only draws a sliver at the top" bug.
+    if (partial) restoreDirtyClip(ctx)
+    return
+  }
   ctx.save()
   ctx.globalAlpha *= crosshairAlpha
 

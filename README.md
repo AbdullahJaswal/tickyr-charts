@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <code>@abdullahjaswal/tickyr-charts</code>
+  <code>@abdullahjaswal/tickyr-charts-react</code> &nbsp;·&nbsp; <code>@abdullahjaswal/tickyr-charts-solid</code>
 </p>
 
 ## Gallery
@@ -78,17 +78,24 @@ Every example is rendered live from the library. Theme (light / dark), color sch
 
 ## Install
 
+Separate, self-contained packages per framework - install the one you use:
+
 ```sh
-bun add @abdullahjaswal/tickyr-charts
-# or: npm install @abdullahjaswal/tickyr-charts
+# React
+bun add @abdullahjaswal/tickyr-charts-react react react-dom
+
+# Solid
+bun add @abdullahjaswal/tickyr-charts-solid solid-js
 ```
+
+`react` / `react-dom` (React) and `solid-js` (Solid) are peer dependencies. Each package bundles the shared core + WASM engine, so there's nothing else to install.
 
 ## Quick start
 
 ### React
 
 ```tsx
-import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts/react"
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts-react"
 
 export default function App() {
   return (
@@ -108,7 +115,7 @@ export default function App() {
 ### Solid
 
 ```tsx
-import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts/solid"
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts-solid"
 
 function App() {
   return (
@@ -127,7 +134,7 @@ function App() {
 
 ```tsx
 import { useRef } from "react"
-import { CandleChart, type CandleChartHandle } from "@abdullahjaswal/tickyr-charts/react"
+import { CandleChart, type CandleChartHandle } from "@abdullahjaswal/tickyr-charts-react"
 
 const ref = useRef<CandleChartHandle>(null)
 
@@ -195,7 +202,7 @@ Matches a mid-tier device floor.
 For hosts that prefer a hook-driven setup:
 
 ```tsx
-import { useStreamingCandles } from "@abdullahjaswal/tickyr-charts/react"
+import { useStreamingCandles } from "@abdullahjaswal/tickyr-charts-react"
 
 const { candles, pushTick, ready } = useStreamingCandles({
   timeframeMinutes: 1,
@@ -213,9 +220,8 @@ The hook owns the streaming engine + pre-allocated bar buffer. Each `pushTick` v
 ## Package surface
 
 ```
-@abdullahjaswal/tickyr-charts          → shared types, engine helpers, personalization config
-@abdullahjaswal/tickyr-charts/react    → React adapters
-@abdullahjaswal/tickyr-charts/solid    → Solid adapters
+@abdullahjaswal/tickyr-charts-react    → React adapter (core + WASM engine bundled in)
+@abdullahjaswal/tickyr-charts-solid    → Solid adapter (core + WASM engine bundled in)
 ```
 
 Both adapters render the same canvas pixels - switch freely between them in the same codebase.

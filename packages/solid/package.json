@@ -1,0 +1,41 @@
+{
+  "name": "@abdullahjaswal/tickyr-charts-solid",
+  "version": "0.1.0",
+  "description": "Tickyr Charts for SolidJS: opinionated, canvas-rendered trading and financial-data charts, powered by a vendored Rust/WASM engine.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdullahJaswal/tickyr-charts.git",
+    "directory": "packages/solid"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/solid/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/solid/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "d3-array": "^3.2.4",
+    "d3-format": "^3.1.2",
+    "d3-scale": "^4.0.2",
+    "d3-shape": "^3.2.0",
+    "d3-time-format": "^4.1.0",
+    "d3-zoom": "^3.0.0"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.9.0"
+  }
+}

@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 <Meta title="Introduction" />
 
-# @abdullahjaswal/tickyr-charts
+# Tickyr Charts
 
 Multi-platform chart library for trading and financial-data visualization.
 React + Solid adapters share one framework-agnostic controller per chart;
@@ -10,9 +10,14 @@ canvas + d3-math + a Rust engine compiled to WASM do the heavy lifting.
 
 ## Install
 
+Self-contained package per framework:
+
 ```sh
-bun add @abdullahjaswal/tickyr-charts
-# or: npm install @abdullahjaswal/tickyr-charts
+# React
+bun add @abdullahjaswal/tickyr-charts-react react react-dom
+
+# Solid
+bun add @abdullahjaswal/tickyr-charts-solid solid-js
 ```
 
 ## Quick start
@@ -20,7 +25,7 @@ bun add @abdullahjaswal/tickyr-charts
 ### React
 
 ```tsx
-import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts/react"
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts-react"
 
 export default function App() {
   return (
@@ -38,7 +43,7 @@ export default function App() {
 ### Solid
 
 ```tsx
-import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts/solid"
+import { ChartsProvider, CandleChart } from "@abdullahjaswal/tickyr-charts-solid"
 
 function App() {
   return (
@@ -124,7 +129,7 @@ detection, audit/telemetry callbacks).
 ### `useStreamingCandles` hook
 
 ```tsx
-import { useStreamingCandles } from "@abdullahjaswal/tickyr-charts/react"
+import { useStreamingCandles } from "@abdullahjaswal/tickyr-charts-react"
 
 const { candles, pushTick } = useStreamingCandles({
   timeframeMinutes: 1,

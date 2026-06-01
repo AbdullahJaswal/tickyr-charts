@@ -9,54 +9,62 @@ import topLevelAwait from "vite-plugin-top-level-await"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// Builds ONE self-contained adapter package per invocation, selected by the
+// `ADAPTER` env var (see the build:react / build:solid scripts). Each output
+// bundles the shared framework-agnostic core + the vendored WASM engine; only
+// the framework runtime and d3 stay external. Output lands in
+// `packages/<adapter>/dist`, which that workspace package publishes.
+const adapter = process.env.ADAPTER === "solid" ? "solid" : "react"
+const isReact = adapter === "react"
+
+const D3 = [
+  "d3-array",
+  "d3-format",
+  "d3-scale",
+  "d3-shape",
+  "d3-time-format",
+  "d3-zoom",
+]
+
 export default defineConfig({
   plugins: [
-    // Bundle the vendored WASM engine into dist so the published package is
-    // self-contained (the engine stays unpublished). wasm-bindgen
-    // bundler-target output needs these two plugins to bundle the .wasm + its
-    // top-level await rather than externalizing the import.
+    // wasm-bindgen bundler-target output imports the .wasm asset and runs a
+    // top-level await; these two plugins bundle it in rather than externalize.
     wasm(),
     topLevelAwait(),
-    dts({ bundleTypes: true }),
-    react({
-      include: ["src/react/**/*.{ts,tsx}"],
+    // Per-file .d.ts tree scoped to THIS adapter (entry at dist/<adapter>/
+    // index.d.ts). Excludes the sibling adapter + the old combined src/index.ts
+    // so the Solid package never picks up React types and vice versa. No
+    // api-extractor rollup - that path is hardwired to the old web/dist layout.
+    dts({
+      entryRoot: resolve(__dirname, "src"),
+      outDirs: [resolve(__dirname, `packages/${adapter}/dist`)],
+      include: ["src"],
+      exclude: [
+        `src/${isReact ? "solid" : "react"}/**`,
+        "src/index.ts",
+        "**/__tests__/**",
+        "**/*.test.*",
+        "test/**",
+        "**/*.stories.tsx",
+      ],
     }),
-    solid({
-      // Restrict to .tsx - Solid's JSX transform only matters for files
-      // with JSX. Including plain .ts files made the plugin inspect
-      // every controller / helper file in `src/solid` unnecessarily.
-      include: ["src/solid/**/*.tsx"],
-      ssr: false,
-    }),
+    isReact
+      ? react({ include: ["src/react/**/*.{ts,tsx}"] })
+      : solid({ include: ["src/solid/**/*.tsx"], ssr: false }),
   ],
   build: {
-    // Match the browser floor. The default legacy target
-    // (chrome87/es2020) can't transform the destructuring that
-    // vite-plugin-top-level-await emits when wrapping the engine's TLA.
     target: ["chrome111", "edge111", "firefox128", "safari16.4"],
+    outDir: resolve(__dirname, `packages/${adapter}/dist`),
+    emptyOutDir: true,
     lib: {
-      entry: {
-        index: resolve(__dirname, "src/index.ts"),
-        react: resolve(__dirname, "src/react/index.ts"),
-        solid: resolve(__dirname, "src/solid/index.ts"),
-      },
+      entry: { index: resolve(__dirname, `src/${adapter}/index.ts`) },
       formats: ["es"],
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "solid-js",
-        "solid-js/web",
-        "solid-js/store",
-        "d3-array",
-        "d3-format",
-        "d3-scale",
-        "d3-shape",
-        "d3-time-format",
-        "d3-zoom",
-      ],
+      external: isReact
+        ? ["react", "react-dom", "react/jsx-runtime", ...D3]
+        : ["solid-js", "solid-js/web", "solid-js/store", ...D3],
     },
   },
 })
